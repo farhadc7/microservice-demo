@@ -43,6 +43,7 @@
 	</dependencyManagement>
 	<build>
 		<plugins>
+
 			<!-- as java uses version 7 for compiling the code for source and target, we must use this plugin-->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
