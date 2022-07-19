@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>2.7.1</version>
+		<relativePath/> <!-- lookup parent from repository -->
+	</parent>
+	<groupId>com.farhad</groupId>
+	<artifactId>microservice.demo</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<name>microservice.demo</name>
+	<description>Demo project for Spring Boot microservice</description>
+<!--	default packaging is jar since we don't have any source file in this project , the packaging shouldn't be jar,
+		but should be pom which implies this pom will be used as base configuration not for creating runnable jar-->
+	<packaging>pom</packaging>
+	<properties>
+		<java.version>11</java.version>
+<!--		add spring-boot.version in properties and add it to all dependencies and plugins so submodules don't need to mention it.-->
+		<spring-boot.version>2.7.1</spring-boot.version>
+		<!--move maven plugin version in here-->
+		<maven-plugin.version>3.10.1</maven-plugin.version>
+	</properties>
+<!--	we put all dependencies in dependencyManagement so submodules don't need to download theme again.-->
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-starter</artifactId>
+				<version>${spring-boot.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-starter-test</artifactId>
+				<version>${spring-boot.version}</version>
+				<scope>test</scope>
+			</dependency>
+		</dependencies>
+
+	</dependencyManagement>
+	<build>
+		<plugins>
+			<!-- as java uses version 7 for compiling the code for source and target, we must use this plugin-->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>${maven-plugin.version}</version>
+				<configuration>
+					<!--	from java 9 we must use realse tag-->
+					<release>11</release>
+					<!--	<source>1.8</source>-->
+					<!--	<target>1.8</target>-->
+				</configuration>
+			</plugin>
+		</plugins>
+<!--		using pluginManagement so submodules don't need to declare version of plugin and using any feature of the plugin they needed.-->
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.springframework.boot</groupId>
+<!--					can create executable archives such as jar files and war files which contain all applicaiton dependencies and run
+						with a single java -jar command this feature is builtin in the maven plugin in addition can do things like :
+						make project runnable, start applicaiton,create build information,and create docker image-->
+					<artifactId>spring-boot-maven-plugin</artifactId>
+					<version>${spring-boot.version}</version>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+
+	</build>
+
+</project>
