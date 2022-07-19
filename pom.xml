@@ -57,6 +57,7 @@
 				</configuration>
 			</plugin>
 		</plugins>
+
 <!--		using pluginManagement so submodules don't need to declare version of plugin and using any feature of the plugin they needed.-->
 		<pluginManagement>
 			<plugins>
